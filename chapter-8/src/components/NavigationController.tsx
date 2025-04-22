@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useCallback, useMemo, useState } from "react";
 
 import { Context } from "../context/";
 
@@ -9,16 +9,18 @@ type Props = {
 export const NavigationController = ({ children }: Props) => {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
 
-  const toggle = () => setIsNavExpanded(!isNavExpanded);
-
-  return (
-    <Context.Provider
-      value={{
-        isNavExpanded,
-        toggle,
-      }}
-    >
-      {children}
-    </Context.Provider>
+  const toggle = useCallback(
+    () => setIsNavExpanded(!isNavExpanded),
+    [isNavExpanded],
   );
+
+  const value = useMemo(
+    () => ({
+      isNavExpanded,
+      toggle,
+    }),
+    [isNavExpanded, toggle],
+  );
+
+  return <Context.Provider value={value}>{children}</Context.Provider>;
 };
