@@ -1,14 +1,12 @@
+import { useNavigation } from "../hooks/useNavigation";
 import { ExpandButton } from "./ExpandButton";
 
-type Props = {
-  isNavExpanded: boolean;
-  toggleNav: () => void;
-};
+export const Sidebar = () => {
+  const { isNavExpanded, toggle } = useNavigation();
 
-export const Sidebar = ({ isNavExpanded, toggleNav }: Props) => {
   return (
     <div>
-      <ExpandButton isNavExpanded={isNavExpanded} toggleNav={toggleNav} />
+      <ExpandButton isNavExpanded={isNavExpanded} toggleNav={toggle} />
 
       <ul>
         <li>

@@ -1,8 +1,8 @@
-type Props = {
-  isNavExpanded: boolean;
-};
+import { useNavigation } from "../hooks/useNavigation";
 
-export const AdjustableColumnBlock = ({ isNavExpanded }: Props) => {
+export const AdjustableColumnBlock = () => {
+  const { isNavExpanded } = useNavigation();
+
   return isNavExpanded ? (
     <div>two block items here</div>
   ) : (

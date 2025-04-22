@@ -1,16 +1,12 @@
 import { AdjustableColumnBlock } from "./AdjustableColumnBlock";
 import { SlowComponentOne, SlowComponentTwo } from "./SlowComponent";
 
-type Props = {
-  isNavExpanded: boolean;
-};
-
-export const Main = ({ isNavExpanded }: Props) => {
+export const Main = () => {
   return (
     <>
       <SlowComponentOne />
       <SlowComponentTwo />
-      <AdjustableColumnBlock isNavExpanded={isNavExpanded} />
+      <AdjustableColumnBlock />
     </>
   );
 };
