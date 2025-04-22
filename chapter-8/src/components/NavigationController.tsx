@@ -1,22 +1,27 @@
-import { ReactNode, useCallback, useMemo, useState } from "react";
+import { ReactNode, useMemo, useReducer } from "react";
 import { ContextApi, ContextData } from "../context";
+import { defaultState, reducer } from "../state";
 
 type Props = {
   children: ReactNode;
 };
 
 export const NavigationController = ({ children }: Props) => {
-  const [isNavExpanded, setIsNavExpanded] = useState(false);
+  const [state, dispatch] = useReducer(reducer, defaultState);
 
-  const open = useCallback(() => setIsNavExpanded(true), []);
-  const close = useCallback(() => setIsNavExpanded(false), []);
-
-  const data = useMemo(() => ({ isNavExpanded }), [isNavExpanded]);
-  const api = useMemo(() => ({ open, close }), [open, close]);
+  const data = useMemo(() => ({ isNavExpanded: state.isNavExpanded }), [state]);
+  const api = useMemo(
+    () => ({
+      open: () => dispatch({ type: "open" }),
+      close: () => dispatch({ type: "close" }),
+      toggle: () => dispatch({ type: "toggle" }),
+    }),
+    [],
+  );
 
   return (
     <ContextData.Provider value={data}>
-      <ContextApi.Provider value={api}>{children}</ContextApi.Provider>;
+      <ContextApi.Provider value={api}>{children}</ContextApi.Provider>
     </ContextData.Provider>
   );
 };
