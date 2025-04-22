@@ -1,6 +1,10 @@
 import { createContext } from "react";
 
-export const Context = createContext({
+export const ContextData = createContext({
   isNavExpanded: false,
-  toggle: () => {},
+});
+
+export const ContextApi = createContext({
+  open: () => {},
+  close: () => {},
 });

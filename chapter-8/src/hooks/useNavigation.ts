@@ -1,4 +1,5 @@
 import { useContext } from "react";
-import { Context } from "../context";
+import { ContextApi, ContextData } from "../context";
 
-export const useNavigation = () => useContext(Context);
+export const useNavigationApi = () => useContext(ContextApi);
+export const useNavigationData = () => useContext(ContextData);

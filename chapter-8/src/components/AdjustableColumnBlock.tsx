@@ -1,7 +1,7 @@
-import { useNavigation } from "../hooks/useNavigation";
+import { useNavigationData } from "../hooks/useNavigation";
 
 export const AdjustableColumnBlock = () => {
-  const { isNavExpanded } = useNavigation();
+  const { isNavExpanded } = useNavigationData();
 
   return isNavExpanded ? (
     <div>two block items here</div>

@@ -1,6 +1,5 @@
 import { ReactNode, useCallback, useMemo, useState } from "react";
-
-import { Context } from "../context/";
+import { ContextApi, ContextData } from "../context";
 
 type Props = {
   children: ReactNode;
@@ -9,18 +8,15 @@ type Props = {
 export const NavigationController = ({ children }: Props) => {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
 
-  const toggle = useCallback(
-    () => setIsNavExpanded(!isNavExpanded),
-    [isNavExpanded],
-  );
+  const open = useCallback(() => setIsNavExpanded(true), []);
+  const close = useCallback(() => setIsNavExpanded(false), []);
 
-  const value = useMemo(
-    () => ({
-      isNavExpanded,
-      toggle,
-    }),
-    [isNavExpanded, toggle],
-  );
+  const data = useMemo(() => ({ isNavExpanded }), [isNavExpanded]);
+  const api = useMemo(() => ({ open, close }), [open, close]);
 
-  return <Context.Provider value={value}>{children}</Context.Provider>;
+  return (
+    <ContextData.Provider value={data}>
+      <ContextApi.Provider value={api}>{children}</ContextApi.Provider>;
+    </ContextData.Provider>
+  );
 };
