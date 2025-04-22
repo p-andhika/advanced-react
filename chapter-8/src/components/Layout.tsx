@@ -1,9 +1,14 @@
 import { ReactNode } from "react";
+import { NavigationController } from "./NavigationController";
 
 type Props = {
   children: ReactNode;
 };
 
 export const Layout = ({ children }: Props) => {
-  return <div>{children}</div>;
+  return (
+    <NavigationController>
+      <div>{children}</div>
+    </NavigationController>
+  );
 };
